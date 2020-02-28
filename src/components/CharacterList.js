@@ -11,7 +11,6 @@ export default function CharacterList() {
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
-    
       axios.get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/?page=${page}`)
       .then(Response => setData(Response.data.results))
       console.log(Response)
@@ -35,9 +34,11 @@ const next = () => {
 
 
   return (
-      <div>
+ 
+        <Container>
            <button onClick = {Previous}>Previous</button>
             <button onClick = {next}>Next</button>
+            <Row>
         {data.map((char,index) => (
           <CharacterCard 
           name = {char.name} 
@@ -47,8 +48,9 @@ const next = () => {
           key = {index}
           />
         ))}
-       
-      </div>
+        </Row>
+       </Container>
+     
   );
 }
 
