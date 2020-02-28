@@ -11,6 +11,7 @@ export default function App() {
     <main>
       <Header />
       <WelcomePage />
+      <CharacterList />
     </main>
   );
 }
