@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import characterCard from './CharacterCard';
 import CharacterCard from "./CharacterCard";
+import {Container, Row} from 'reactstrap';
 
 
 export default function CharacterList() {
@@ -11,15 +11,33 @@ export default function CharacterList() {
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
-      axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`)
+    
+      axios.get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/?page=${page}`)
       .then(Response => setData(Response.data.results))
       console.log(Response)
 
     //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
   }, [page]);
 
+  const Previous = () =>  {
+    if(page > 1){
+        setPage(page - 1);
+    }
+    console.log(page)
+};
+
+const next = () => {
+    if(page < 25){
+        setPage(page + 1);
+    }
+    console.log(page)
+};
+
+
   return (
       <div>
+           <button onClick = {Previous}>Previous</button>
+            <button onClick = {next}>Next</button>
         {data.map((char,index) => (
           <CharacterCard 
           name = {char.name} 
@@ -33,3 +51,4 @@ export default function CharacterList() {
       </div>
   );
 }
+
